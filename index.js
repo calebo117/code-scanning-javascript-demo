@@ -236,11 +236,12 @@ exports.extract = function (cwd, opts) {
     header = map(header) || header
     header.name = normalize(header.name)
     mainEntry = path.join('/', mainEntry).substr(1);
-
-	  if (!mainEntry || mainEntry === '..') {
-		  return;
-	  }
-    var name = path.join(cwd, path.join('/', header.name))
+    var name = "";
+    if (!mainEntry || mainEntry === '..') {
+	    return;
+    }else{
+	    name = path.join(cwd, path.join('/', header.name));
+    }
 
     if (ignore(name, header)) {
       stream.resume()
