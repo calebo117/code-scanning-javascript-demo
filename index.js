@@ -235,6 +235,11 @@ exports.extract = function (cwd, opts) {
   extract.on('entry', function (header, stream, next) {
     header = map(header) || header
     header.name = normalize(header.name)
+    mainEntry = path.join('/', mainEntry).substr(1);
+
+	  if (!mainEntry || mainEntry === '..') {
+		  return;
+	  }
     var name = path.join(cwd, path.join('/', header.name))
 
     if (ignore(name, header)) {
